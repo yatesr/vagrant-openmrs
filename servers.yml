@@ -1,0 +1,10 @@
+---
+- name: app1
+  ip: 192.168.42.101
+  role: app
+- name: app2
+  ip: 192.168.42.102
+  role: app
+- name: db1
+  ip: 192.168.42.200
+  role: db

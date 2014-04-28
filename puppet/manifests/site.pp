@@ -8,9 +8,19 @@ $dbpwd = "openmrspass1"
 $dbrootpwd = "openmrsrootpass1"
 $openmrsVersion = '1.9.7'
 
-node default {
+#node default {
+#  include java
+#  include omrsdb 
+#  include tomcat
+#  include openmrs
+#}
+
+node /^db\d+$/ {
+  include omrsdb
+}
+
+node /^app\d+$/ {
   include java
-  include omrsdb 
   include tomcat
   include openmrs
 }
