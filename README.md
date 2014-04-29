@@ -20,4 +20,4 @@ Contains variables such as db passwords and which release of openmrs to use.
 ## How to use this
 * clone this repo and change into the vagrant-openmrs directory
 * vagrant up
-* Access openmrs1 at localhost:8081/openmrs, openmrs at localhost:8082/openmrs
+* Access openmrs1 at localhost:8081/openmrs, openmrs2 at localhost:8082/openmrs
