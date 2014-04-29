@@ -2,6 +2,7 @@ class omrsdb {
   class { 'mysql::client':}
   class { '::mysql::server':
       root_password                => "${dbrootpwd}",
+      restart                      => true,
       override_options             => {
         'mysqld'                   => {
           'bind-address'           => '0.0.0.0',
@@ -33,5 +34,6 @@ class omrsdb {
       sql      => '/tmp/demo-1.9.0.sql',
       require  => Class['::mysql::server'], 
     }
+    
     
 }

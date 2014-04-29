@@ -7,9 +7,14 @@ servers = YAML.load_file('servers.yaml')
  
   servers.each do |servers|
     config.vm.define servers["name"] do |serv|
-	serv.vm.box = "precise64"
+	serv.vm.box = "hashicorp/precise64"
         serv.vm.network "private_network", ip: servers["ip"]
         serv.vm.hostname = servers["name"]
+	
+	if servers["role"] == "app"
+		serv.vm.network "forwarded_port", guest: 8080, host: servers["fwdport"].to_i
+	else
+	end
 	serv.vm.provider "virtualbox" do |v|
          v.customize  ["modifyvm", :id,
           "--cpus", "1",
@@ -17,14 +22,14 @@ servers = YAML.load_file('servers.yaml')
           "--name", servers["name"],
        ]
         end
-        config.vm.provision "shell",
-     	inline: "sudo apt-get update"
+        serv.vm.provision "shell",
+     	inline: "sudo apt-get update > /dev/null"
 
-  	config.vm.provision "puppet" do |puppet|
+  	serv.vm.provision "puppet" do |puppet|
     	  puppet.manifests_path = "puppet/manifests"
           puppet.manifest_file = "site.pp"
           puppet.module_path = "puppet/modules"
-          puppet.options = "--verbose --debug" # for debugging purposes
+         # puppet.options = "--verbose --debug" # for debugging purposes
   	end
       end
     end
