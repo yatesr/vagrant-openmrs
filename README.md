@@ -1,7 +1,8 @@
 vagrant-openmrs
 ===============
 
-Vagrant file that deploys openmrs using puppet.
+Vagrantfile that deploys openmrs using puppet.
+Defaults to 2 separate openmrs installations using the same database on another machine.
 
 ## Requirements
 * Vagrant 1.5+
